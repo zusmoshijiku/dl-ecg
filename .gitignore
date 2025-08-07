@@ -205,3 +205,23 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ECG Data and Models
+data/
+*.dat
+*.hea
+*.atr
+*.h5
+*.npz
+models/
+*.pth
+*.pkl
+*.joblib
+
+# TensorBoard logs
+runs/
+logs/
+
+# IDE specific
+.vscode/
+.idea/

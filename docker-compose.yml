@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  ecg-analysis:
+    build: .
+    ports:
+      - "8888:8888"
+      - "6006:6006"  # TensorBoard
+    volumes:
+      - ./data:/app/data
+      - ./notebooks:/app/notebooks
+      - ./src:/app/src
+      - ./models:/app/models
+    environment:
+      - PYTHONPATH=/app
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''
+
+  tensorboard:
+    build: .
+    ports:
+      - "6007:6006"
+    volumes:
+      - ./logs:/app/logs
+    command: tensorboard --logdir=/app/logs --host=0.0.0.0 --port=6006
+    depends_on:
+      - ecg-analysis
